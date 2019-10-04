@@ -96,7 +96,7 @@
     <nav class="navbar" style="background-color: #FFF; text-align: center">
         <div class="container-fluid"><center>
             <div class="container-fluid">
-                <a  href="index.html"><img src="assets/images/logo.png" style="width: 140px; margin-top: 6px; margin-bottom: -8PX;"></a></center>                 
+                <a  href="index.php"><img src="assets/images/logo.png" style="width: 140px; margin-top: 6px; margin-bottom: -8PX;"></a></center>                 
             </div>
             <div class="navbar-header">
                 <a href="javascript:void(0);" class="bars" style="color: black"></a>

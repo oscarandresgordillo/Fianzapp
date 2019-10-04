@@ -59,7 +59,10 @@
                                             <td><?php echo $r->nombre_usuario_solicitud; ?></td>
                                             <td><?php echo $r->cedula_usuario_solicitud; ?></td>
                                             <td><?php echo $r->celular_usuario_solicitud; ?></td>
-                                            <td><div class="icon text-center"><a href="?c=administrador&a=Editar_usuario_solicitud&id=<?php echo $r->id_usuario_solicitud;?>"><i class="material-icons" title="Editar">create</i></a><a href="?c=administrador&a=ver_usuario_solicitud&id=<?php echo $r->id_usuario_solicitud;?>"><i class="material-icons" title="Ver">remove_red_eye</i></a>
+                                            <td>
+                                                <div class="icon text-center">
+                                                    <a href="?c=administrador&a=Editar_usuario_solicitud&id=<?php echo $r->id_usuario_solicitud;?>"><i class="material-icons" title="Editar">create</i></a>
+                                                    <a href="?c=administrador&a=ver_usuario_solicitud&id=<?php echo $r->id_usuario_solicitud;?>"><i class="material-icons" title="Ver">remove_red_eye</i></a>
                                             </div></td>
                                             
                                         </tr>
