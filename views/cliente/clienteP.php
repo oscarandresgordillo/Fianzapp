@@ -24,7 +24,7 @@
 
 						}?>
 						<form id="form_validation" method="post" action="?c=cliente&a=Cambiar_contrasena">
-							<input type="hidden" name="id_usuario" value="<?php echo $cli->id_usuario; ?>">
+							<input type="hidden" name="id_usuario" value="<?php if (!empty($cli->id_usuario)){echo $cli->id_usuario;} ?>">
 							<div class="row clearfix">
 								<div class="col-md-6">
 									<div class="input-group">

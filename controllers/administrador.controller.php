@@ -94,10 +94,11 @@ class AdministradorController{
         header('Location:index.php?c=administrador&a=index_cliente');
     }
 
-    public function Cli_Demandados(){
+    /*public function Cli_Demandados(){
         $cli_deman = new Administrador();
 
         $cli_deman= $this->model->Listar_usuario_solicitud();
+        var_dump($cli_deman);
         return $cli_deman;
         
         require_once 'views/header.php';
@@ -106,7 +107,7 @@ class AdministradorController{
         require_once 'views/footer.php';
             
 
-    }
+    }*/
 
    public function Editar_cliente(){
 
@@ -136,6 +137,10 @@ class AdministradorController{
     }
 
     public function Index_usuario_solicitud(){
+        $cli_deman = new Administrador();
+
+        $cli_deman= $this->model->Listar_usuario_solicitud();
+    
         require_once 'views/header.php';
         require_once 'views/menu.php';
         require_once 'views/administrador/panelUsuarioSolicitudes.php';
