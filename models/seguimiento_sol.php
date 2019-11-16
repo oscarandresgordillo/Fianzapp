@@ -27,15 +27,32 @@ class Seguimiento
 			die($e->getMessage());
 		}
 	}
+public function Listar_Estado()
+	{
+		try
+		{
+			$result = array();
 
+			$stm = $this->pdo->prepare("SELECT * FROM estado_seguimiento");
+			$stm->execute();
+			$stm->pdo=null;
+
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(Exception $e)
+		
+		{
+			die($e->getMessage());
+		}
+	}
 	public function Listar_Seguimiento()
 	{
 		try
 		{
 			$result = array();
 
-			$stm = $this->pdo->prepare("SELECT se.id_seg_proceso, se.fecha_creacion,se.observaciones,se.archivo_seg_proceso,se.id_estado,es.estado FROM seguimiento_proceso as se  
-				Join estado_seguimiento as es on es.id_estado_segui = se.id_estado");
+			$stm = $this->pdo->prepare("SELECT se.id_seg_proceso, se.fecha_creacion,se.fecha_modificado,se.observaciones,se.archivo_seg_proceso,p.numero_proceso ,es.estado FROM seguimiento_proceso as se  
+				Join estado_seguimiento as es on es.id_estado_segui = se.id_estado join proceso as p on p.id_proceso = se.id_proceso");
 			$stm->execute();
 			$stm->pdo=null;
 
@@ -48,17 +65,41 @@ class Seguimiento
 		}
 	}
 
+	public function Listar_seguimiento_id($id)
+	{
+		try
+		{
+			
+
+	$stm = $this->pdo->prepare("SELECT se.id_seg_proceso, se.fecha_creacion,se.observaciones,se.archivo_seg_proceso,p.numero_proceso ,es.estado 
+								FROM seguimiento_proceso as se  
+								Join estado_seguimiento as es on es.id_estado_segui = se.id_estado join proceso as p on p.id_proceso = se.id_proceso
+								where se.id_proceso = ?");
+			
+			$stm->execute(array($id));
+			$stm->pdo=null;
+			return $stm->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(Exception $e)
+		
+		{
+			die($e->getMessage());
+		}
+	}
+
 	public function Obtener_Seguimiento($id)
 	{
-		try 
-		{
-			$stm = $this->pdo
-			          ->prepare("SELECT se.fecha_creacion,se.fecha_modificado,se.observaciones,se.archivo_seg_proceso,se.id_estado_segui,es.estado FROM seguimiento_solicitudes as se  
-				Join estado_seguimiento as es on es.id_estado_segui = se.id_estado  WHERE se.id_seg_proceso = ?");
+		try {
+		
+			$stm = $this->pdo->prepare("SELECT se.id_seg_proceso, se.fecha_creacion,se.observaciones,se.archivo_seg_proceso,se.id_estado,p.numero_proceso ,es.estado 
+								FROM seguimiento_proceso as se  
+								Join estado_seguimiento as es on es.id_estado_segui = se.id_estado join proceso as p on p.id_proceso = se.id_proceso
+								where se.id_proceso = ?");
 			          
 			$stm->execute(array($id));
 			$stm->pdo=null;
 			return $stm->fetch(PDO::FETCH_OBJ);
+		
 		} catch (Exception $e) 
 		{
 			die($e->getMessage());
@@ -69,22 +110,20 @@ class Seguimiento
 	{
 		try 
 		{
-			$sql = "UPDATE seguimiento_solicitudes SET 
-							Fecha_modificado          = ?, 
-							Observaciones          = ?, 
-							Archivo          = ?, 
-							num_solicitud          = ?, 
-							id_estado_segui        = ?
-					    WHERE id_seguimiento_solicitud = ?";
+			$sql = "UPDATE seguimiento_proceso SET 
+							fecha_modificado          = ?, 
+							observaciones          = ?, 
+							archivo_seg_proceso         = ?, 
+							id_estado          = ? 
+					    WHERE id_seg_proceso = ?";
 
 			$hola=$this->pdo->prepare($sql)
 			     ->execute(
 				    array(
-                        $data->Fecha_modificado, 
-                        $data->Observaciones, 
-                        $data->Archivo,
-                        $data->num_solicitud , 
-                        $data->id_estado_segui,
+                        $data->fecha, 
+	                    $data->Observaciones, 
+	                    $data->Archivo, 
+	                    $data->id_estado_segui,
                         $data->id_seguimiento_solicitud
 					)
 				);
@@ -99,18 +138,18 @@ class Seguimiento
 	{
 		try 
 		{
-		$sql = "INSERT INTO seguimiento_solicitudes (Fecha_creacion,Observaciones,Archivo,num_solicitud,id_estado_segui) 
-		        VALUES (?, ?, ?, ?, ?)";
+		$sql = "INSERT INTO seguimiento_proceso (fecha_creacion,observaciones,archivo_seg_proceso,id_estado,id_proceso) 
+		        VALUES ( ?, ?, ?, ?, ?)";
 
 		$hola=$this->pdo->prepare($sql)
 		     ->execute(
 				array(
-                    $data->Fecha_creacion, 
+                    $data->fecha, 
                     $data->Observaciones, 
                     $data->Archivo, 
-                    $data->num_solicitud, 
-					$data->id_estado_segui
-					$data->
+                    $data->id_estado_segui,
+                    $data->num_solicitud 
+					
                 )
 			);
 			return $hola;

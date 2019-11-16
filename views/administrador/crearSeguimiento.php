@@ -10,7 +10,7 @@
                     <div class="card">
                         <div class="body">
                         	<form id="form_validation" method="post" action="?c=seguimiento&a=Guardar_seguimiento" enctype="multipart/form-data">
-                        		<input type="hidden" name="id_seguimiento_solicitud" value="<?php echo $sg->id_seguimiento_solicitud; ?>">
+                        		<input type="hidden" name="id_seg_proceso" value="<?php echo $sg->id_seg_proceso; ?>">
 								<input type="hidden" name="id_proceso" value="<?php echo $_GET['sol']; ?>">
 	                            <div class="row clearfix">	                                             
 	                                <div class="col-md-4">
@@ -19,32 +19,25 @@
 	                                            <i class="material-icons">assignment</i>
 	                                        </span>
 	                                        <div class="form-line">
-	                                            <input type="textarea" class="form-control date" placeholder="Observaciones" name="Observaciones" value="<?php if(!empty($sg->Observaciones)) {echo $sg->Observaciones;} ?>">
+	                                            <input type="textarea" class="form-control date" placeholder="Observaciones" name="Observaciones" value="<?php if(!empty($sg->observaciones)) {echo $sg->observaciones;} ?>">
 	                                        </div>
 	                                    </div>
 	                                </div>
 	                            </div>
 	                            <div class="row clearfix">            
-	                                <div class="col-md-4">
-	                                    <div class="input-group">
-	                                        <span class="input-group-addon">
-	                                            <i class="material-icons">email</i>
-	                                        </span>
-	                                        <div class="form-line">
-	                                            <input type="hidden" class="form-control date" placeholder="Número de solicitud" name="num_solicitud" value="<?php if(!empty($sg->num_solicitud) || !empty($nu)) {echo $sg->num_solicitud; echo $nu;} ?>" >
-	                                        </div>
-	                                    </div>
-	                                </div>
+	                               
 	                                <div class="col-md-4">
 	                                    <div class="input-group">
 	                                        <span class="input-group-addon">
 	                                            <i class="material-icons">person</i>
 	                                        </span>
 	                                        <div class="form-line">
-	                                            <select class="form-control date" name="id_estado_segui">
-												  <option value="<?php if(!empty($sg->estado)) ?>"><?php {echo $sg->estado;} ?></option> 
-												  <option value="3" >En proceso</option>
-												  <option value="4">Finalizado</option>
+	                                            <select  class="form-control date" name="id_estado_segui">
+												  <option value="<?php echo $sg->id_estado; ?>"><?php {echo $sg->estado;} ?></option> 
+												  <?php
+	                                    		foreach ($est as $r) {?>
+                                                    <option  value="<?php echo $r->id_estado_segui; ?>"><?php echo $r->estado; ?></option>
+                                                <?php } ?>
 												</select>
 	                                        </div>
 	                                    </div>

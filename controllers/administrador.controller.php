@@ -110,6 +110,8 @@ class AdministradorController{
 
     public function Ver_cliente(){
 
+        
+        
         $cli = new Administrador();
 
         if(isset($_REQUEST['id'])){
@@ -122,6 +124,7 @@ class AdministradorController{
     }
 
     public function Index_usuario_solicitud(){ 
+
         require_once 'views/header.php';
         require_once 'views/menu.php';
         require_once 'views/administrador/panelUsuarioSolicitudes.php';
@@ -184,7 +187,7 @@ class AdministradorController{
 
     public function Index_solicitud(){
 
-        $sol = $this->model->Listar_solicitudes();
+        $sol = $this->model->Listar_proceso();
         require_once 'views/header.php';
         require_once 'views/menu.php';
         require_once 'views/administrador/panelSolicitudes.php';
@@ -197,7 +200,8 @@ class AdministradorController{
 
         $cli = $this->model->Listar_clientes();
         $ususol = $this->model->Listar_usuario_solicitud();
-        $est = $this->model->Listar_estados();
+        $est = $this->model->Listar_estado();
+        $adm = $this->model->Listar();
 
         require_once 'views/header.php';
         require_once 'views/menu.php';
@@ -210,7 +214,7 @@ class AdministradorController{
         $usu = new Administrador();
         $carpetaDestino="assets/documents/";
         $lastid="";
-
+ 
         if(isset($_REQUEST['descripcion']) && isset($_REQUEST['id_solicitud']) && isset($_REQUEST['id_cliente'])){
         if(isset($_FILES["archivo"]) && $_FILES["archivo"]["name"]){
             if(file_exists($carpetaDestino)||@mkdir($carpetaDestino)){
@@ -234,6 +238,8 @@ class AdministradorController{
         $usu->id_usuario_sol = $_REQUEST['id_usuario_sol'];
         $usu->descripcion_sol = $_REQUEST['descripcion'];
         $usu->archivo_sol = $_REQUEST['archivo'];
+        $usu->id_administrador = $_REQUEST['id_admin'];
+
 
         $usu->id_sol > 0 
             ? $this->model->Actualizar_solicitud($usu)
@@ -256,7 +262,7 @@ class AdministradorController{
 
             //$cli = $this->model->Listar_clientes();
             //$ususol = $this->model->Listar_usuario_solicitud();
-            $est = $this->model->Listar_estados();
+            $est = $this->model->Listar_estado();
             $sol = $this->model->Obtener_solicitud($_REQUEST['id']);
             
 
@@ -275,11 +281,31 @@ class AdministradorController{
         if(isset($_REQUEST['id'])){
             $usu = $this->model->Obtener_solicitud($_REQUEST['id']);
             $usu2 = $this->model->Obtener_solicitud($_REQUEST['id']);
-            var_dump($usu2);
-        }
+        
         require_once 'views/header.php';
         require_once 'views/menu.php';
         require_once 'views/administrador/verSolicitud.php';
         require_once 'views/footer.php';
     }    
+}
+ public function Descargar_seguimiento(){
+        if(!empty($_GET['file'])){
+    $fileName = basename($_GET['file']);
+    $filePath = 'assets/documents/'.$fileName;
+    if(!empty($fileName) && file_exists($filePath)){
+        // Define headers
+        header("Cache-Control: public");
+        header("Content-Description: File Transfer");
+        header("Content-Disposition: attachment; filename=$fileName");
+        header("Content-Type: application/zip");
+        header("Content-Transfer-Encoding: binary");
+        
+        // Read the file
+        readfile($filePath);
+        exit;
+    }else{
+        echo 'The file does not exist.';
+    }
+}
+    }
 }

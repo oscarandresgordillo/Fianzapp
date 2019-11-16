@@ -1,19 +1,19 @@
 <?php
-require_once 'models/ingresarCliente.php';
+/*require_once 'models/ingresarCliente.php';*/
 
 class IngresarClienteController{
     
-    private $model;
+    /*private $model;
     
   	public function __CONSTRUCT(){
         $this->model = new IngresarCliente();
     }
 
     public function Index(){
-        require_once 'views/ingresarCliente.php';
+        require_once 'indexCliente.php';
     }
 
-    public function Ingresar_usuario(){
+   /* public function Ingresar_usuario(){
         
         $obj = new IngresarCliente();
         
@@ -27,12 +27,12 @@ class IngresarClienteController{
         {
         	header('Location: ingresarCliente.php');
         }
-    }
+    }*/
 
     public function Cerrar_sesion(){
 
         @session_start();
         session_destroy();
-        header("Location: ingresarCliente.php");
+        header("Location: ingresar.php");
     }
 }

@@ -6,7 +6,8 @@
             <div class="user-info">
                 <div class="info-container">
                     <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Bienvenido(a)</div>
-                    <div class="email">Sr.(a) <?php echo $_SESSION['nombre_cliente'];?></div>
+                    <div class="email">Sr.(a) <?php echo $_SESSION['nombre_administrador'];?></div>
+
                     <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                         <ul class="dropdown-menu pull-right">
@@ -35,7 +36,7 @@
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="?c=cliente&a=Listar_procesos">
+                                <a href="?c=cliente&a=Ver_solicitud&id=<?php echo $_SESSION['documento_administrador']; ?>">  
                                     <span>Panel principal</span>
                                 </a>
                             </li>

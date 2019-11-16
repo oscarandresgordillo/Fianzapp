@@ -11,7 +11,7 @@
                     <div class="card">
                         <div class="body">
                         	<form id="form_validation" method="post" action="?c=administrador&a=Guardar_usuario_solicitud">
-                        		<input type="hidden" name="id_usuario_sol" value="<?php echo $usu->id_usuario_solicitud; ?>">
+                        		<input type="hidden" name="id_usuario_sol" value="<?php echo $usu->id_usuario_demandado; ?>">
 	                            <div class="row clearfix">
 	                                <div class="col-md-4">
 	                                    <div class="input-group">
@@ -19,7 +19,7 @@
 	                                            <i class="material-icons">account_box</i>
 	                                        </span>
 	                                        <div class="form-line">
-	                                            <input type="text" class="form-control date" placeholder="Nombre Completo" name="nombre_usuario_deman" value="<?php if(!empty($usu->nombre_usuario_solicitud)) {echo $usu->nombre_usuario_solicitud;} ?>">
+	                                            <input required type="text" class="form-control date" placeholder="Nombre Completo" name="nombre_usuario_deman" value="<?php if(!empty($usu->nombre_usuario_demandado)) {echo $usu->nombre_usuario_demandado;} ?>">
 	                                        </div>
 	                                    </div>
 	                                </div>             
@@ -29,7 +29,7 @@
 	                                            <i class="material-icons">assignment</i>
 	                                        </span>
 	                                        <div class="form-line">
-	                                            <input type="text" class="form-control date" placeholder="Cédula" name="cedula_usuario_deman" value="<?php if(!empty($usu->cedula_usuario_solicitud)) {echo $usu->cedula_usuario_solicitud;} ?>">
+	                                            <input required type="text" class="form-control date" placeholder="Cédula" name="cedula_usuario_deman" value="<?php if(!empty($usu->cedula_usuario_demandado)) {echo $usu->cedula_usuario_demandado;} ?>">
 	                                        </div>
 	                                    </div>
 	                                </div>
@@ -39,7 +39,7 @@
 	                                            <i class="material-icons">phone</i>
 	                                        </span>
 	                                        <div class="form-line">
-	                                            <input type="text" class="form-control date" placeholder="Teléfono" name="telefono_usuario_deman" value="<?php if(!empty($usu->telefono_usuario_solicitud)) {echo $usu->telefono_usuario_solicitud;} ?>">
+	                                            <input required  type="text" class="form-control date" placeholder="Teléfono" name="telefono_usuario_deman" value="<?php if(!empty($usu->telefono_usuario_demandado)) {echo $usu->telefono_usuario_demandado;} ?>">
 	                                        </div>
 	                                    </div>
 	                                </div>
@@ -51,7 +51,7 @@
 	                                            <i class="material-icons">stay_current_portrait</i>
 	                                        </span>
 	                                        <div class="form-line">
-	                                            <input type="text" class="form-control date" placeholder="Celular" name="celular_usuario_deman" value="<?php if(!empty($usu->celular_usuario_solicitud)) {echo $usu->celular_usuario_solicitud;} ?>">
+	                                            <input required type="text" class="form-control date" placeholder="Celular" name="celular_usuario_deman" value="<?php if(!empty($usu->celular_usuario_demandado)) {echo $usu->celular_usuario_demandado;} ?>">
 	                                        </div>
 	                                    </div>
 	                                </div>             
@@ -61,7 +61,7 @@
 	                                            <i class="material-icons">email</i>
 	                                        </span>
 	                                        <div class="form-line">
-	                                            <input type="text" class="form-control date" placeholder="Correo" name="correo_usuario_deman" value="<?php if(!empty($usu->correo_usuario_solicitud)) {echo $usu->correo_usuario_solicitud;} ?>">
+	                                            <input required type="text" class="form-control date" placeholder="Correo" name="correo_usuario_deman" value="<?php if(!empty($usu->correo_usuario_demandado)) {echo $usu->correo_usuario_demandado;} ?>">
 	                                        </div>
 	                                    </div>
 	                                </div>
@@ -71,7 +71,7 @@
 	                                            <i class="material-icons">person_pin_circle</i>
 	                                        </span>
 	                                        <div class="form-line">
-	                                            <input type="text" class="form-control date" placeholder="Dirección" name="direccion_usuario_deman" value="<?php if(!empty($usu->direccion_usuario_solicitud)) {echo $usu->direccion_usuario_solicitud;} ?>">
+	                                            <input required type="text" class="form-control date" placeholder="Dirección" name="direccion_usuario_deman" value="<?php if(!empty($usu->direccion_usuario_demandado)) {echo $usu->direccion_usuario_demandado;} ?>">
 	                                        </div>
 	                                    </div>
 	                                </div>

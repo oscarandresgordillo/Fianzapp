@@ -36,7 +36,9 @@ class Ingresar
 				$_SESSION['documento_administrador']=$data->documento_administrador; 
 				$_SESSION['correo_administrador']=$data->correo_administrador; 
 				$_SESSION['usuario_administrador']=$data->usuario_administrador; 
+				$_SESSION['id_rol']=$data->id_rol; 
 				return $true="true";
+				
 			}
 			else
 			{

@@ -47,7 +47,7 @@ class ClienteController{
         }
         require_once 'views/headerCliente.php';
         require_once 'views/menuCliente.php';
-        require_once 'views/cliente/verSolicitud.php';
+        require_once 'views/cliente/panelSolicitudesCliente.php';
         require_once 'views/footer.php';
     }
 
@@ -64,9 +64,9 @@ class ClienteController{
         $cli = new Cliente();
 
         session_start();
-        $cli->id_usuario = $_SESSION['id_cliente'];
-        $cli->contrasena = hash('sha256', $_REQUEST['contrasena_cliente']);
-        $cli->contrasena2 = hash('sha256', $_REQUEST['contrasena_cliente2']);
+        $cli->id_usuario = $_REQUEST['id_usuario'];
+        $cli->contrasena =  $_REQUEST['contrasena_cliente'];
+        $cli->contrasena2 = $_REQUEST['contrasena_cliente2'];
 
         if ($cli->contrasena==$cli->contrasena2) {
 

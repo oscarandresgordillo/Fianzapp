@@ -18,6 +18,8 @@ class SeguimientoController{
 
     public function Crear_seguimiento(){
         $hola=$_GET['sol'];
+        $usu = new Seguimiento();
+        $est = $this->model->Listar_Estado();
         require_once 'views/header.php';
         require_once 'views/menu.php';
         require_once 'views/administrador/crearSeguimiento.php';
@@ -29,12 +31,12 @@ class SeguimientoController{
         $carpetaDestino="assets/documents/";
         $correo=false;
         $lastid="";
-        if(isset($_REQUEST['Observaciones']) && isset($_REQUEST['num_solicitud']) && isset($_REQUEST['id_estado_segui'])){
+        if(isset($_REQUEST['Observaciones']) && isset($_REQUEST['id_proceso']) && isset($_REQUEST['id_estado_segui'])){
         if(isset($_FILES["archivo"]) && $_FILES["archivo"]["name"]){
             if(file_exists($carpetaDestino)||@mkdir($carpetaDestino)){
                     $origen=$_FILES["archivo"]["tmp_name"];
                     $destino=$carpetaDestino.$_FILES["archivo"]["name"];
-                    //var_dump($destino);
+                
                 if(@move_uploaded_file($origen,$destino)){
                         echo "<br>".$_FILES["archivo"]["name"]." movido correctamente"; 
                     }else{
@@ -43,15 +45,15 @@ class SeguimientoController{
                 }else{
                     echo "<br>No se ha podido crear la carpeta: ".$carpetaDestino." o no existe la carpeta";
                 }}
-        $fecha = date("d/m/y H:i:s");
+        
         $sg= new Seguimiento();
-        $sg->id_seguimiento_solicitud=$_REQUEST["id_seguimiento_solicitud"];
-        $sg->Fecha_creacion = $fecha;
-        $sg->Fecha_modificado = "";
+        $fecha = date("d/m/y H:i:s");
+        $sg->id_seguimiento_solicitud=$_REQUEST["id_seg_proceso"]; 
         $sg->Observaciones = $_REQUEST['Observaciones'];
         $sg->Archivo = $_FILES["archivo"]["name"];
-        $sg->num_solicitud = $_REQUEST['num_solicitud'];
+        $sg->num_solicitud = $_REQUEST['id_proceso'];
         $sg->id_estado_segui= $_REQUEST['id_estado_segui'];
+        $sg->fecha  = $fecha;
         //var_dump($sg);
         if($sg->id_seguimiento_solicitud > 0 ){
             $lastid=$this->model->Actualizar_seguimiento($sg);
@@ -81,15 +83,28 @@ class SeguimientoController{
         require_once 'views/footer.php';
     }
      public function Ver_seguimiento(){
+        $sg = new Seguimiento();
+
+        if(isset($_REQUEST['id'])){
+            //$cli = $this->model->Obtener_Seguimiento($_REQUEST['id']);
+            $seg = $this->model->Listar_seguimiento_id($_REQUEST['id']);
+        }
+        require_once 'views/header.php';
+        require_once 'views/menu.php';
+        require_once 'views/administrador/ListarSeguimientoID.php';
+        require_once 'views/footer.php';
+    }
+
+    public function Listar_seguimiento_id(){
 
          $sg = new Seguimiento();
 
         if(isset($_REQUEST['id'])){
-            $cli = $this->model->Obtener_Seguimiento($_REQUEST['id']);
+            $sg = $this->model->Listar_seguimiento_id($_REQUEST['id']);
         }
-        require_once 'views/headerCliente.php';
-        require_once 'views/menuCliente.php';
-        require_once 'views/cliente/verSeguimiento.php';
+         require_once 'views/header.php';
+        require_once 'views/menu.php';
+        require_once 'views/administrador/ListarSeguimientoID.php';
         require_once 'views/footer.php';
     }
 

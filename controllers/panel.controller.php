@@ -13,6 +13,7 @@ class PanelController{
     public function Index(){
 
         $sol = $this->model->Listar_proceso();
+        
         $clientes = $this->model->contar_cliente();
         
 

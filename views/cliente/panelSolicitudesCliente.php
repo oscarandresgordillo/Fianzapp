@@ -19,33 +19,36 @@
                                 <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
                                             <th>Número</th>
                                             <th>Estado</th>
-                                            <th>Demandado</th>
-                                            <th>Acción</th>
+                                            <th>Cliente</th>
+                                            <th>Observaciones</th>
+                                            <th>Archivo</th>
+                                            
                                         </tr>
                                     </thead>
                                     <tfoot >
                                         <tr>
-                                            <th>ID</th>
                                             <th>Número</th>
                                             <th>Estado</th>
-                                            <th>Demandado</th>
-                                            <th>Acción</th>
+                                            <th>Cliente</th>
+                                            <th>Observaciones</th>
+                                            <th>Archivo</th>
+                                            
                                         </tr>
                                     </tfoot>
                                     <tbody class="text-center">
-                                        <?php foreach($this->model->Listar_solicitudes() as $r):?>
+
+                                       
                                         <tr>
-                                            <td><?php echo $r->id_solicitud; ?></td>
-                                            <td><?php echo $r->numero_solicitud; ?></td>
-                                            <td><?php echo $r->nombre_estado_solicitud; ?></td>
-                                            <td><?php echo $r->nombre_usuario_solicitud; ?></td>
-                                            <td><div class="icon text-center"><!-- <a href="?c=cliente&a=Editar_solicitud&id=<?php echo $r->id_solicitud;?>"><i class="material-icons" title="Editar">create</i> --></a><a href="?c=cliente&a=ver_solicitud&id=<?php echo $r->id_solicitud;?>"><i class="material-icons" title="Ver">remove_red_eye</i></a>
-                                            </div></td>
+                                            <td><?php echo $cli->numero_proceso; ?></td>
+                                            <td><?php echo $cli->nombre_estado_solicitud; ?></td>
+                                            <td><?php echo $cli->nombre_cliente; ?></td>
+                                            <td><?php echo $cli->descripcion; ?></td>
+                                            <td><?php echo $cli->archivo_proceso; ?></td>
+                                            
                                         </tr>
-                                        <?php endforeach; ?>
+                                        
                                     </tbody>
                                 </table>
                             </div>

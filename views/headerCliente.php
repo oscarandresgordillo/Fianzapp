@@ -1,6 +1,7 @@
  <?php  
     session_start();
-    if (empty($_SESSION['id_cliente'])) {
+
+    if (empty($_SESSION['id_admin'])) {
         header('Location: ingresarCliente.php');
     }
 ?> 

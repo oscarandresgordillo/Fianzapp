@@ -139,7 +139,12 @@ class Cliente
 		try 
 		{
 			$stm = $this->pdo
-			          ->prepare("SELECT * FROM solicitudes, clientes, estados_solicitudes, usuarios_solicitudes WHERE id_solicitud = ? AND id_cliente_sol=id_cliente AND id_estado_sol=id_estado_solicitud AND id_usuario_sol = id_usuario_solicitud");
+			          ->prepare("SELECT * FROM proceso as p 
+								Join estado_proceso as est on est.id_estado_solicitud = p.id_estado 
+								join demandado as d on d.id_usuario_demandado = p.id_demandado
+								join cliente as c on c.id_cliente = p.id_cliente
+								join administrador as a on a.id_admin = p.id_administrador
+			 WHERE p.id_demandado = ?");
 			          
 			$stm->execute(array($id));
 			$stm->pdo=null;
@@ -150,15 +155,20 @@ class Cliente
 		}
 	}
 
-	public function Listar_solicitudes()
+	/*public function Listar_solicitudes()
 	{
 		try
 		{
 			$result = array();
-			$id_usuario = $_SESSION['id_cliente'];
+			$id_usuario = $_SESSION['documento_administrador'];
 
-			$stm = $this->pdo->prepare("SELECT * FROM solicitudes,clientes,usuarios_solicitudes,estados_solicitudes WHERE id_cliente_sol= :id_cliente AND id_cliente_sol = id_cliente AND id_estado_sol = id_estado_solicitud AND id_usuario_sol = id_usuario_solicitud");
-			$stm->bindparam(':id_cliente', $id_usuario);
+			$stm = $this->pdo->prepare("SELECT * FROM proceso as p 
+								Join estado_proceso as est on est.id_estado_solicitud = p.id_estado 
+								join demandado as d on d.id_usuario_demandado = p.id_demandado
+								join cliente as c on c.id_cliente = p.id_cliente
+								join administrador as a on a.id_admin = p.id_administrador
+			 WHERE p.id_demandado = :documento_administrador");
+			$stm->bindparam(':documento_administrador', $id_usuario);
 			$stm->execute();
 			$stm->pdo=null;
 
@@ -168,7 +178,7 @@ class Cliente
 		{
 			die($e->getMessage());
 		}
-	}
+	}*/
 
 	public function contar_clientes()
 	{
@@ -192,10 +202,10 @@ class Cliente
 	{
 		try 
 		{
-			$sql = "UPDATE clientes SET 
-							contrasena_cliente = ?
+			$sql = "UPDATE administrador SET 
+							contrasena_administrador = ?
 
-					  WHERE id_cliente= ?";
+					  WHERE id_admin= ?";
 
 			$this->pdo->prepare($sql)
 			     ->execute(

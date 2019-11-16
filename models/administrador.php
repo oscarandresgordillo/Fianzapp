@@ -344,7 +344,7 @@ class Administrador
 	{
 		try 
 		{
-		$sql = "INSERT INTO demandado (nombre_cliente,cedula_cliente,telefono_cliente,celular_cliente,correo_cliente,direccion_cliente) 
+		$sql = "INSERT INTO demandado (nombre_usuario_demandado,cedula_usuario_demandado,telefono_usuario_demandado,celular_usuario_demandado,correo_usuario_demandado,direccion_usuario_demandado) 
 		        VALUES (?, ?, ?, ?, ?, ?)";
 
 		$this->pdo->prepare($sql)
@@ -386,8 +386,8 @@ class Administrador
 	{
 		try 
 		{
-		$sql = "INSERT INTO proceso (numero_proceso,id_cliente,id_estado,id_usuario_demandado,descripcion,archivo_proceso) 
-		        VALUES (?, ?, ?, ?, ?, ?)";
+		$sql = "INSERT INTO proceso (numero_proceso,id_cliente,id_estado,id_demandado,descripcion,archivo_proceso,id_administrador) 
+		        VALUES (?, ?, ?, ?, ?, ?,?)";
 
 		$hola=$this->pdo->prepare($sql)
 		     ->execute(
@@ -397,7 +397,8 @@ class Administrador
                     $data->id_estado_sol, 
                     $data->id_usuario_sol, 
                     $data->descripcion_sol,
-                    $data->Archivo
+                    $data->archivo_sol,
+                    $data->id_administrador
                 )
 
 			);$stm->pdo=null;
@@ -413,7 +414,13 @@ class Administrador
 		try 
 		{
 			$stm = $this->pdo
-			          ->prepare("SELECT * FROM proceso, cliente, estado_proceso, demandado WHERE numero_solicitud = ? ");
+			          ->prepare("SELECT p.numero_proceso, p.id_estado,p.id_demandado, p.descripcion, p.archivo_proceso, p.fecha_creacion,est.nombre_estado_solicitud,d.nombre_usuario_demandado,c.nombre_cliente,a.nombre_administrador
+								FROM proceso as p 
+								Join estado_proceso as est on est.id_estado_solicitud = p.id_estado 
+								join demandado as d on d.id_usuario_demandado = p.id_demandado
+								join cliente as c on c.id_cliente = p.id_cliente
+								join administrador as a on a.id_admin = p.id_administrador
+								where p.id_proceso = ? ");
 			          
 			$stm->execute(array($id));
 			$stm->pdo=null;

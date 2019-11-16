@@ -62,14 +62,27 @@
                                         foreach($sol as $r):?>
                                         <tr>
                                             
-                                            <td><?php echo $r->numero_solicitud; ?></td>
+                                            <td><?php echo $r->numero_proceso; ?></td>
                                             <td><?php echo $r->nombre_estado_solicitud; ?></td>
-                                            <td><?php echo $r->nombre_cliente; ?></td>
-                                            <td><?php echo $r->nombre_usuario_solicitud; ?></td>
-                                            <td><?php echo $r->Archivo; ?></td>
-                                            <td><div title="Crear Seguimiento" class="icon text-center"><a href="?c=seguimiento&a=Crear_seguimiento&sol=<?php echo $r->numero_solicitud;?>"><i class="material-icons">create_new_folder</i></a>
-                                            </div><div class="icon text-center"><a href="?c=administrador&a=Editar_solicitud&id=<?php echo $r->id_solicitud;?>"><i class="material-icons" title="Editar">create</i></a><a href="?c=administrador&a=ver_solicitud&id=<?php echo $r->numero_solicitud;?>"><i class="material-icons" title="Ver">remove_red_eye</i></a>
-                                            </div></td>
+                                            <td><?php echo $r->nombre_cliente; ?></td> 
+                                            <td><?php echo $r->nombre_usuario_demandado; ?></td>
+                                            <td><a href="?c=administrador&a=Descargar_seguimiento&file=<?php echo $r->archivo_proceso;?>"><?php echo $r->archivo_proceso; ?></a></td> 
+                                            <td>
+                                            <div  class="icon text-center">
+                                                <a href="?c=seguimiento&a=Crear_seguimiento&sol=<?php echo $r->id_proceso;?>">
+                                                <i class="material-icons" title="Crear Seguimiento">create_new_folder</i></a>
+                                                <a href="?c=seguimiento&a=Ver_seguimiento&id=<?php echo $r->id_proceso;?>">
+                                                <i class="material-icons" title="Ver Seguimiento">remove_red_eye</i></a>
+                                                                                               
+                                            </div>
+                                            
+                                            <div class="icon text-center">
+                                                <a href="?c=administrador&a=Editar_solicitud&id=<?php echo $r->id_proceso;?>">
+                                                <i class="material-icons" title="Editar">create</i></a>
+                                                <a href="?c=administrador&a=ver_solicitud&id=<?php echo $r->id_proceso;?>">
+                                                <i class="material-icons" title="Ver">remove_red_eye</i></a>
+                                            </div>
+                                        </td>
                                         </tr>
                                         <?php endforeach; ?>
                                     </tbody>

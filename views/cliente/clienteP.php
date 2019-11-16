@@ -24,7 +24,7 @@
 
 						}?>
 						<form id="form_validation" method="post" action="?c=cliente&a=Cambiar_contrasena">
-							<input type="hidden" name="id_usuario" value="<?php echo $cli->id_usuario; ?>">
+							<input type="hidden" name="id_usuario" value="<?php echo $_SESSION['id_admin']; ?>">
 							<div class="row clearfix">
 								<div class="col-md-6">
 									<div class="input-group">

@@ -13,7 +13,7 @@
                             <i class="material-icons">replay</i>
                         </div>
                         <div class="content">
-                            <div class="text">VOLVER A SOLICITUDES</div>
+                            <div class="text">VOLVER A PROCESOS</div>
                             <div class="number count-to" data-from="0" data-to="243" data-speed="1000" data-fresh-interval="20"></div>
                         </div>
                     </div></a>
@@ -27,7 +27,7 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                LISTADO DE SEGUIMIENTO DE SOLICITUD
+                                LISTADO DE SEGUIMIENTO DE PROCESO
                             </h2>
                         </div>
                         <div class="body">
@@ -36,7 +36,8 @@
                                     <thead>
                                         <tr>
                                             
-                                            <th>Fecha</th>
+                                            <th>Fecha Creación</th>
+                                            <th>Fecha Modificación</th>
                                             <th>Observaciones</th>
                                             <th>Archivo</th>
                                             <th>N_solicitud</th>
@@ -47,7 +48,8 @@
                                     <tfoot >
                                         <tr>
                                             
-                                            <th>Fecha</th>
+                                            <th>Fecha Creación</th>
+                                            <th>Fecha Modificación</th>
                                             <th>Observaciones</th>
                                             <th>Archivo</th>
                                             <th>N_solicitud</th>
@@ -56,15 +58,21 @@
                                         </tr>
                                     </tfoot>
                                     <tbody class="text-center">
-                                        <?php foreach($this->model->Listar_Seguimiento() as $r): ?>
+                                        <?php 
+                                        require_once ('models/seguimiento_sol.php');
+                                        $model = new Seguimiento();
+                                        $s= $this->model->Listar_Seguimiento();
+
+                                        foreach($s as $r): ?>
                                         <tr>
-                                            
-                                            <td><?php echo $r->Fecha_creacion; ?></td>
-                                            <td><?php echo $r->Observaciones; ?></td>
-                                            <td><a href="?c=seguimiento&a=Descargar_seguimiento&file=<?php echo $r->Archivo;?>"><?php echo $r->Archivo; ?></a></td>
-                                            <td><?php echo $r->num_solicitud; ?></td>
+                                            <td><?php echo $r->fecha_creacion; ?></td> 
+                                            <td><?php echo $r->fecha_modificado; ?></td> 
+                                            <td><?php echo $r->observaciones; ?></td>
+                                            <td><a href="?c=seguimiento&a=Descargar_seguimiento&file=<?php echo $r->archivo_seg_proceso;?>"><?php echo $r->archivo_seg_proceso; ?></a></td>
+                                            <td><?php echo $r->numero_proceso; ?></td>
                                             <td><?php echo $r->estado; ?></td>
-                                            <td><div class="icon text-center"><a href="?c=seguimiento&a=Editar_seguimiento&id=<?php echo $r->id_seguimiento_solicitud;?>"><i class="material-icons" title="Editar">create</i></a><a href="?c=seguimiento_sol&a=Ver_seguimiento&id=<?php echo $r->id_seguimiento_solicitud;?>"><i class="material-icons" title="Ver">remove_red_eye</i></a>
+                                            <td><div class="icon text-center"><a href="?c=seguimiento&a=Editar_seguimiento&id=<?php echo $r->id_seg_proceso;?>"><i class="material-icons" title="Editar">create</i></a>
+                                                <!--<a href="?c=seguimiento_sol&a=Ver_seguimiento&id=<?php //echo $r->id_seg_proceso;?>"><i class="material-icons" title="Ver">remove_red_eye</i></a>-->
                                             </div></td>
                                         </tr>
                                         <?php endforeach; ?>

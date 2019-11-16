@@ -18,9 +18,8 @@ class IngresarController{
         
         $obj->usuario = $_REQUEST['usuario'];
         $obj->contrasena = $_REQUEST['contrasena']; /*hash('sha256',$_REQUEST['contrasena']);*/
-        if ($this->model->Ingreso($obj)=="true") {
-        	header('Location: index.php');
-
+        if ($this->model->Ingreso($obj)=="true"  ) {
+        	header('Location: validar.php');
         }
         else
         {
